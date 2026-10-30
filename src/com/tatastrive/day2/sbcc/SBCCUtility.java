@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public class SBCCUtility {
 
 	//HXCB1234D:Dhoni:5:50:130:55:102:100:North:Batsman:3:2 
-	public Player parsePlayerDetails( String playerDetails) 
+	public Player parsePlayerDetails( String playerDetails) throws InvalidPlayerIdException 
 	{
 		Player player = null;
 		
@@ -58,13 +58,19 @@ public class SBCCUtility {
 	}
 
 
-	public boolean 	validatePlayerId(String playerId)
+	public boolean 	validatePlayerId(String playerId) throws InvalidPlayerIdException
 	{
 		boolean isValid=false;
 		
 		isValid= Pattern.matches("[A-Z]{4}[0-9]{4}[A-Z]", playerId);
-		
-		return isValid;
+		if(isValid)
+		{
+			return true;
+		}
+		else
+		{
+			throw new InvalidPlayerIdException("Player with Id "+playerId+" is not valid");
+		}
 	}
 
 }

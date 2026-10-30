@@ -14,19 +14,24 @@ public class UserInterface {
 		{
 			System.out.println("1. Validate player details");
 			System.out.println("2. Create Batsman or Bowler");
-			System.out.println("3. Exit ");
-			System.out.println("Enter your choice");
+			System.out.println("3. Validation with InvalidPlayerIdException ");
+			System.out.println("4. Exit");
 			
 			choice=scanner.nextInt();
 			scanner.nextLine();
 			
 			
 			
-			 if(choice==1 || choice==2)
+			 if(choice==1 || choice==2 || choice==3)
 			{
 				System.out.println("Enter the player details ");
 				String playerDetails = scanner.nextLine();
-				player = sbccUtility.parsePlayerDetails(playerDetails);
+				try {
+					player = sbccUtility.parsePlayerDetails(playerDetails);
+				} catch (InvalidPlayerIdException e) {
+					
+					System.out.println(e.getMessage());
+				}
 				
 				if(player==null)
 				{
